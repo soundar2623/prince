@@ -291,3 +291,38 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
+
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/search/:query" component={SearchResults} />
+      </Switch>
+    </Router>
+  );
+}
+
+
+
+
+import { useHistory } from 'react-router-dom';
+
+function SearchBar() {
+  const history = useHistory();
+
+  const handleSearch = (query) => {
+    history.push(`/search/${query}`);
+  };
+
+  return (
+    <form onSubmit={(e) => {e.preventDefault(); handleSearch(query)}}>
+      <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+      <button type="submit">Search</button>
+    </form>
+  );
+}
